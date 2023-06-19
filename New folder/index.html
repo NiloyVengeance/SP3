@@ -1,0 +1,223 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Cloth Selling Website</title>
+  <link rel="stylesheet" href="style.css">
+</head>
+
+<body>
+  <header>
+    <nav>
+      <ul>
+        <li><a href="#">Home</a></li>
+        <li><a href="#">Men</a></li>
+        <li><a href="#">Women</a></li>
+        <li><a href="#">Children</a></li>
+        <li><a href="#">Contact</a></li>
+        <li><a href="#" id="profile-link">Profile</a></li>
+      </ul>
+    </nav>
+    <div id="login-container">
+      <input type="text" id="username" placeholder="Username">
+      <input type="password" id="password" placeholder="Password">
+      <button id="login-btn">Login</button>
+    </div>
+  </header>
+
+  <main>
+    <section class="banner">
+      <h1>Welcome To ML</h1>
+      <p>Discover the latest trends and create your own style.</p>
+    </section>
+
+    <section class="search-section">
+      <input type="text" id="search-input" placeholder="Search...">
+      <button id="search-btn">Search</button>
+    </section>
+
+    <section class="featured-products">
+      <h2>Featured Products</h2>
+      <div class="product" data-description="Size: M,L,XL,XXL | Brand: Cuba | Fabric: Cotton | Colour: Blue &amp; White">
+        <img src="pic/Shirt.jpg" alt="Cuban Shirt">
+        <h3>Cuban Shirt</h3>
+        <p>1299Tk</p>
+        <a href="#" class="btn">Add to Cart</a>
+        <div class="reviews">
+          <h4>Reviews</h4>
+          <ul>
+            <li>Great quality and fits perfectly!</li>
+            <li>Love the design. Highly recommended.</li>
+          </ul>
+          <input type="text" placeholder="Write a review...">
+          <button class="review-btn">Submit</button>
+        </div>
+      </div>
+
+      <div class="product" data-description="Size: M,L,XL | Brand: Angels | Fabric: Cotton ">
+        <img src="pic/Dress.jpg" alt="Product 2">
+        <h3>Skirt & Top</h3>
+        <p>4499Tk</p>
+        <a href="#" class="btn">Add to Cart</a>
+        <div class="reviews">
+          <h4>Reviews</h4>
+          <ul>
+            <li>Super comfortable and stylish.</li>
+            <li>Great value for money.</li>
+          </ul>
+          <input type="text" placeholder="Write a review...">
+          <button class="review-btn">Submit</button>
+        </div>
+      </div>
+
+      <div class="product" data-description="Brand: JBC | Colour: Black">
+        <img src="pic/Cap.jpg" alt="Product 3">
+        <h3>Trucker Cap</h3>
+        <p>499Tk</p>
+        <a href="#" class="btn">Add to Cart</a>
+        <div class="reviews">
+          <h4>Reviews</h4>
+          <ul>
+            <li>Awesome hat! Great fit.</li>
+            <li>Very stylish and comfortable.</li>
+          </ul>
+          <input type="text" placeholder="Write a review...">
+          <button class="review-btn">Submit</button>
+        </div>
+      </div>
+
+      <div class="product" data-description="Size:30,32,34,36 | Fabric: Denim | Brand: H&M">
+        <img src="pic/Denim Pant.jpg" alt="Product 4">
+        <h3>Denim pants</h3>
+        <p>1499Tk</p>
+        <a href="#" class="btn">Add to Cart</a>
+        <div class="reviews">
+          <h4>Reviews</h4>
+          <ul>
+            <li>Perfect fit and great quality.</li>
+            <li>Love these jeans. Highly recommended.</li>
+          </ul>
+          <input type="text" placeholder="Write a review...">
+          <button class="review-btn">Submit</button>
+        </div>
+      </div>
+    </section>
+
+    <section id="product-description-modal" class="modal">
+      <div class="modal-content">
+        <span class="close">&times;</span>
+        <h2 id="product-description-title"></h2>
+        <p id="product-description"></p>
+      </div>
+    </section>
+
+    <section class="contact-section">
+      <h2>Contact Us</h2>
+      <p>For any inquiries, please contact:</p>
+      <ul>
+        <li>Tonmoy: <span class="contact-number">+123456789</span></li>
+        <li>Labib: <span class="contact-number">+987654321</span></li>
+      </ul>
+    </section>
+  </main>
+
+  <footer>
+    <p>&copy; 2023 ML. All rights reserved.</p>
+  </footer>
+
+  <script>
+    // Login functionality
+    const loginContainer = document.getElementById('login-container');
+    const profileLink = document.getElementById('profile-link');
+
+    document.addEventListener('DOMContentLoaded', () => {
+      const loggedInUser = localStorage.getItem('loggedInUser');
+      if (loggedInUser) {
+        loginContainer.style.display = 'none';
+        profileLink.innerText = `Profile (${loggedInUser})`;
+      } else {
+        loginContainer.style.display = 'flex';
+        profileLink.innerText = 'Profile';
+      }
+    });
+
+    document.getElementById('login-btn').addEventListener('click', () => {
+      const username = document.getElementById('username').value;
+      const password = document.getElementById('password').value;
+
+      // Perform authentication here (e.g., check against a database)
+      // For simplicity, just store the logged-in user in local storage
+      localStorage.setItem('loggedInUser', username);
+
+      loginContainer.style.display = 'none';
+      profileLink.innerText = `Profile (${username})`;
+    });
+
+    // Search functionality
+    document.getElementById('search-btn').addEventListener('click', () => {
+      const searchTerm = document.getElementById('search-input').value;
+      // Perform search functionality (e.g., filter products based on search term)
+      console.log('Searching for:', searchTerm);
+    });
+
+    // Contact information functionality
+    document.addEventListener('DOMContentLoaded', () => {
+      const contactNumbers = document.querySelectorAll('.contact-number');
+      contactNumbers.forEach((contactNumber) => {
+        contactNumber.addEventListener('click', () => {
+          const phoneNumber = contactNumber.innerText;
+          console.log('Contact number clicked:', phoneNumber);
+          // Perform any desired action with the contact number (e.g., initiate a call)
+        });
+      });
+    });
+
+    // Product description modal functionality
+    const productModal = document.getElementById('product-description-modal');
+    const productTitle = document.getElementById('product-description-title');
+    const productDescription = document.getElementById('product-description');
+    const productItems = Array.from(document.querySelectorAll('.product'));
+    const closeButton = document.querySelector('.close');
+
+    productItems.forEach((product) => {
+      product.addEventListener('click', () => {
+        const description = product.getAttribute('data-description');
+        const imageSrc = product.querySelector('img').getAttribute('src');
+        const productName = product.querySelector('h3').textContent;
+
+        // Open a new window
+        const newWindow = window.open('', '_blank');
+        newWindow.document.write(`
+          <html>
+          <head>
+            <title>Product Details</title>
+            <style>
+              body { font-family: Arial, sans-serif; }
+              h1 { margin-top: 0; }
+              .product-image { max-width: 400px; }
+              .product-details { margin-top: 20px; }
+            </style>
+          </head>
+          <body>
+            <h1>${productName}</h1>
+            <img class="product-image" src="${imageSrc}" alt="${productName}">
+            <div class="product-details">
+              <h3>Product Description:</h3>
+              <p>${description}</p>
+            </div>
+          </body>
+          </html>
+        `);
+        newWindow.document.close();
+      });
+    });
+
+    closeButton.addEventListener('click', () => {
+      productModal.style.display = 'none';
+    });
+  </script>
+</body>
+
+</html>
